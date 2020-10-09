@@ -1,0 +1,85 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="https://kit.fontawesome.com/5447febec5.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+  <title>Listagem de Funcionários</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/"><i class="fas fa-home"></i></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+        <li class="nav-item active">
+            <a class="nav-link" href="/">Página inicial</a>
+        </li>
+        <li class="nav-item dropdown">                    
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Funcionários</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/cadastro/cadastrar_funcionario.ejs">Cadastrar</a>
+              <a class="dropdown-item" href="/show/listar_funcionario.ejs">Ver</a>                         
+          </div>
+      </li>
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Produtos</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/cadastro/cadastrar_produto.ejs">Cadastrar</a>
+              <a class="dropdown-item" href="/show/listar_produto.ejs">Ver</a>                         
+          </div>
+      </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="col-md-3">
+  <h2>REGISTROS</h2>
+</div>
+
+<div>
+  <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">NOME</th>
+      <th scope="col">SOBRENOME</th>
+      <th scope="col">DATA DE NASCIMENTO</th>
+      <th scope="col">CPF</th>
+      <th scope="col">RG</th>
+      <th scope="col">E-MAIL</th>
+      <th scope="col">TELEFONE</th>
+      <th scope="col">CARGO</th>     
+      <th scope="col">AÇÃO</th>     
+    </tr>
+  </thead>
+  <tbody>
+    <% data.forEach(function(details) { %>
+      <tr>
+          <td><%= details.nome %></td>
+          <td><%= details.sobrenome %></td>
+          <td><%= details.data_nascimento %></td>
+          <td><%= details.cpf %></td>
+          <td><%= details.rg %></td>
+          <td><%= details.email %></td>
+          <td><%= details.telefone %></td>
+          <td><%= details.cargo %></td>
+          <td><a href="/edit/editar_funcionario.ejs/<%= details._id %>" class="btn btn-secondary">Editar</a> - <a href="/delete-funcionario/<%= details._id %>" class="btn btn-danger" onclick="return confirm('Deseja mesmo excluir?')">Excluir</a></td>
+      </tr>
+      <% }) %>
+  </tbody>
+</table>
+</div>
+
+  <a href="/cadastro/cadastrar_funcionario.ejs" class="btn btn-primary">Novo</a>
+  <a href="/" class="btn btn-secondary">Voltar</a>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>
+

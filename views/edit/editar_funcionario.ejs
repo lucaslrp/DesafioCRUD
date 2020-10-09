@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="https://kit.fontawesome.com/5447febec5.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+  <title>Editar Funcionario</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/"><i class="fas fa-home"></i></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+        <li class="nav-item active">
+            <a class="nav-link" href="/">Página inicial</a>
+        </li>
+        <li class="nav-item dropdown">                    
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Funcionários</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/cadastro/cadastrar_funcionario.ejs">Cadastrar</a>
+              <a class="dropdown-item" href="/show/listar_funcionario.ejs">Ver</a>                         
+          </div>
+      </li>
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Produtos</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/cadastro/cadastrar_produto.ejs">Cadastrar</a>
+              <a class="dropdown-item" href="/show/listar_produto.ejs">Ver</a>                         
+          </div>
+      </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="col-md-3">
+  <h2>Editar Registro</h2>
+</div>
+  <% data.forEach(function(details) { %>
+      <form action="/edit/editar_funcionario.ejs/<%= details._id %>" method="POST">
+        <div class="form-group">
+          <div class="col-md-3">
+            <label for="name">Nome</label>
+            <input type="text" class="form-control" value="<%= details.nome %>" name="nome">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-3">
+            <label for="surname">Sobrenome</label>
+            <input type="text" class="form-control" value="<%= details.sobrenome %>" name="sobrenome">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-3">
+            <label for="birthday">Data de Nascimento</label>
+            <input type="date" class="form-control" value="<%= details.data_nascimento %>" name="data_nascimento">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-3">
+            <label for="cpf">CPF</label>
+            <input type="text" class="form-control" value="<%= details.cpf %>" name="cpf">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-3">
+            <label for="rg">RG</label>
+            <input type="text" class="form-control" value="<%= details.rg %>" name="rg">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-3">
+            <label for="email">E-mail</label>
+            <input type="email" class="form-control" value="<%= details.email %>" name="email">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-3">
+            <label for="telephone">Telefone</label>
+            <input type="tel" class="form-control" value="<%= details.telefone %>" name="telefone">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-3">
+            <label for="job">Cargo</label>
+            <input type="text" class="form-control" value="<%= details.cargo %>" name="cargo">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <button type="submit" class="btn btn-success">Confirmar</button>
+          <a href="/show/listar_funcionario.ejs" class="btn btn-secondary">Voltar</a>
+        </div>               
+      </form>    
+  <% }) %>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>
