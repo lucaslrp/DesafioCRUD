@@ -24,13 +24,29 @@ app.get('/', function(req, res){
   res.render('home');
 });
 
+app.get('/cadastro/cadastrar_funcionario.ejs', function(req, res){
+    res.render('cadastro/cadastrar_funcionario');
+});
+
 app.get('/cadastro/cadastrar_produto.ejs', function(req, res){
   res.render('cadastro/cadastrar_produto.ejs');
 });
 
  app.get('/', (req, res) => {
+    var cursor = db.collection('funcionario').find()
+ })
+
+ app.get('/', (req, res) => {
   var cursor = db.collection('produto').find()
  })
+
+app.get('/show/listar_funcionario.ejs', (req, res) => {
+    db.collection('funcionario').find().toArray((err, results) => {
+        if (err) return console.log(err)
+        res.render('show/listar_funcionario.ejs', { data: results })
+
+    })
+})
 
 app.get('/show/listar_produto.ejs', (req, res) => {
   db.collection('produto').find().toArray((err, results) => {
@@ -38,6 +54,66 @@ app.get('/show/listar_produto.ejs', (req, res) => {
       res.render('show/listar_produto.ejs', { data: results })
 
   })
+})
+
+app.post('/show/listar_funcionario.ejs', (req, res)=>{
+    
+    db.collection('funcionario').save(req.body, (err, result) => {
+        if (err) return console.log(err)
+    
+        console.log('Salvo no Banco de Dados')
+        res.redirect('/show/listar_funcionario.ejs')
+      })
+});
+
+app.route('/edit/editar_funcionario.ejs/:id')
+.get((req, res) => {
+  var id = req.params.id
+
+  db.collection('funcionario').find(ObjectId(id)).toArray((err, result) => {
+    if (err) return res.send(err)
+    res.render('edit/editar_funcionario.ejs', { data: result })
+  })
+})
+.post((req, res) => {
+  var id = req.params.id
+  var nome = req.body.nome
+  var sobrenome = req.body.sobrenome
+  var data_nascimento = req.body.data_nascimento
+  var cpf = req.body.cpf
+  var rg = req.body.rg
+  var email = req.body.email
+  var telefone = req.body.telefone
+  var cargo = req.body.cargo
+
+  db.collection('funcionario').updateOne({_id: ObjectId(id)}, {
+    $set: {
+      nome: nome,
+      sobrenome: sobrenome,
+      data_nascimento: data_nascimento,
+      cpf: cpf,
+      rg: rg,
+      email: email,
+      telefone: telefone,
+      cargo: cargo
+    }
+  }, (err, result) => {
+    if (err) return res.send(err)
+    res.redirect('/show/listar_funcionario.ejs')
+    console.log('Atualizado no Banco de Dados')
+  })
+})
+
+app.route('/delete-funcionario/:id')
+.get((req, res) => {
+  var id = req.params.id
+
+  db.collection('funcionario').deleteOne({_id: ObjectId(id)}, (err, result) => {
+    if (err) return res.send(500, err)
+    console.log('Deletado do Banco de Dados!')
+    res.redirect('/show/listar_funcionario.ejs')
+  })  
+
 })
 
 app.post('/show/listar_produto.ejs', (req, res)=>{
